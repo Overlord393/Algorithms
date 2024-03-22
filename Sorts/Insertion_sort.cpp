@@ -19,5 +19,8 @@ int main() {
             pos--;
         }
     }
-    
+    for (int c : num) {
+        cout << c << " ";
+    }
 }
+
