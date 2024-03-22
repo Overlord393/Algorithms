@@ -19,7 +19,7 @@ int main() {
             pos--;
         }
     }
-    for (int c : num)
+    for (int c : num){
         cout << c << " ";
-
+    }
 }
