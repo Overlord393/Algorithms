@@ -15,8 +15,8 @@ int main() {
     for (int i = 0; i < n; ++i) {
         cin >> nums[i];
     }
-    vector<int> count1(10001,0);
-    vector<int> count2(10001,0);
+    vector<int> count1(10001, 0);
+    vector<int> count2(10001, 0);
     for (int i = 0; i < n; ++i) {
         if (nums[i] >= 0) {
             count1[nums[i]]++;
