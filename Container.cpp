@@ -23,7 +23,6 @@ public:
         head = newNode;
         count++;
     }
-
     void addBack(const T& element) {
         Node* newNode = new Node{element, nullptr};
         if (isEmpty()) {
@@ -34,7 +33,6 @@ public:
         tail = newNode;
         count++;
     }
-
     void removeFront() {
         if (!isEmpty()) {
             Node* temp = head;
@@ -46,7 +44,6 @@ public:
             }
         }
     }
-
     void removeBack() {
         if (!isEmpty()) {
             Node* current = head;
