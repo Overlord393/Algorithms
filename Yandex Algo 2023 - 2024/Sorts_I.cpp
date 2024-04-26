@@ -32,7 +32,6 @@ int main() {
                 result+=item.first;
             }
         }
-
         string result2;
         result2 = result;
         sort(result2.rbegin(), result2.rend());

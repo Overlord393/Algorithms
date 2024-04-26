@@ -26,6 +26,7 @@ int main() {
                 }
             }
         }
+
         if (a.empty()) {
             cout << "yes";
         } else {

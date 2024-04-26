@@ -13,7 +13,6 @@ int main() {
     for (long long i = 0; i < n; ++i) {
         cin >> statements[i];
     }
-
     long long left = 0;
     long long right = 1;
     long long counter = 0;

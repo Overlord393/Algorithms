@@ -12,7 +12,6 @@ int main() {
     for (int i = 0; i < n; ++i) {
         cin >> line[i];
     }
-
     int ans = line[0],
             ans_l = 0,
             ans_r = 0,
