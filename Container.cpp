@@ -1,144 +1,82 @@
 #include <iostream>
+#include <vector>
+#include <map>
+#include <algorithm>
 
-template <typename T>
-class Container {
+class Counter {
 private:
-    struct Node {
-        T data;
-        Node* next;
-    };
-
-    Node* head;
-    Node* tail;
-    size_t count;
+    std::map<int, int> counts;
 
 public:
-    Container() : head(nullptr), tail(nullptr), count(0) {}
+    Counter() {}
 
-    void addFront(const T& element) {
-        Node* newNode = new Node{element, head};
-        if (isEmpty()) {
-            tail = newNode;
+    Counter(const std::vector<int>& vec) {
+        for (int num : vec) {
+            counts[num]++;
         }
-        head = newNode;
-        count++;
     }
-    void addBack(const T& element) {
-        Node* newNode = new Node{element, nullptr};
-        if (isEmpty()) {
-            head = newNode;
-        } else {
-            tail->next = newNode;
+
+    std::vector<std::pair<int, int> > most_common(int n) {
+        std::vector<std::pair<int, int> > sorted_counts(counts.begin(), counts.end());
+        std::sort(sorted_counts.begin(), sorted_counts.end(), [](const auto& a, const auto& b) {
+            return a.second > b.second;
+        });
+        if (n < sorted_counts.size()) {
+            sorted_counts.resize(n);
         }
-        tail = newNode;
-        count++;
+        return sorted_counts;
     }
-    void removeFront() {
-        if (!isEmpty()) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
-            count--;
-            if (isEmpty()) {
-                tail = nullptr;
+
+    void update(const std::vector<int>& vec) {
+        for (int num : vec) {
+            counts[num]++;
+        }
+    }
+
+    std::vector<int> flatten() {
+        std::vector<int> flattened;
+        for (const auto& pair : counts) {
+            for (int i = 0; i < pair.second; ++i) {
+                flattened.push_back(pair.first);
             }
         }
-    }
-    void removeBack() {
-        if (!isEmpty()) {
-            Node* current = head;
-            Node* previous = nullptr;
-            while (current->next != nullptr) {
-                previous = current;
-                current = current->next;
-            }
-            delete current;
-            if (previous) {
-                previous->next = nullptr;
-                tail = previous;
-            } else {
-                head = tail = nullptr;
-            }
-            count--;
-        }
+        return flattened;
     }
 
-    T& getFirst() {
-        return head->data;
+    int operator[](int key) const {
+        return counts.count(key) ? counts.at(key) : 0;
     }
 
-    T& getLast() {
-        return tail->data;
-    }
-
-    void iterate() {
-        Node* current = head;
-        while (current != nullptr) {
-            std::cout << current->data << " ";
-            current = current->next;
-        }
-        std::cout << std::endl;
-    }
-
-    size_t size() {
-        return count;
-    }
-
-    bool isEmpty() {
-        return head == nullptr;
-    }
-
-    void swap(Container& other) {
-        std::swap(head, other.head);
-        std::swap(tail, other.tail);
-        std::swap(count, other.count);
-    }
-
-    void reverse() {
-        Node* prev = nullptr;
-        Node* current = head;
-        Node* next = nullptr;
-
-        while (current) {
-            next = current->next;
-            current->next = prev;
-            prev = current;
-            current = next;
-        }
-
-        std::swap(head, tail);
-    }
-
-    void clear() {
-        while (!isEmpty()) {
-            removeFront();
-        }
-        tail = nullptr;
-    }
-
-    ~Container() {
-        clear();
+    std::map<int, int> get_map() const {
+        return counts;
     }
 };
 
 int main() {
-    Container<int> container;
+    Counter c({1, 2, 2, 2, 4});
 
-    container.addBack(1);
-    container.addBack(2);
-    container.addBack(3);
+    std::map<int, int> initial_map = c.get_map();
+    for (const auto& pair : initial_map) {
+        std::cout << "{" << pair.first << ": " << pair.second << "} ";
+    }
+    std::cout << std::endl;
 
-    std::cout << "First element: " << container.getFirst() << std::endl;
-    std::cout << "Last element: " << container.getLast() << std::endl;
+    c.update({2, 6, 4, 1});
 
-    container.iterate();
+    std::map<int, int> updated_map = c.get_map();
+    for (const auto& pair : updated_map) {
+        std::cout << "{" << pair.first << ": " << pair.second << "} ";
+    }
+    std::cout << std::endl;
 
-    container.reverse();
-    container.iterate();
+    std::vector<int> flattened = c.flatten();
+    for (int num : flattened) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
 
-    container.clear();
-
-    std::cout << "Size after clearing: " << container.size() << std::endl;
+    std::cout << "c[5] = " << c[5] << std::endl;
+    std::cout << "c[1] = " << c[1] << std::endl;
 
     return 0;
 }
