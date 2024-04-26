@@ -23,6 +23,7 @@ int32_t main() {
             max_el = cows[i].second;
         }
     }
+
     int dif_n = a.size();
     bool flag = false;
     sort(cows.begin(), cows.end());

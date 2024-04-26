@@ -19,6 +19,7 @@ int main() {
     for (size_t i = 0; i < k; ++i) {
         cin >> l[i];
     }
+
     sort(a.begin(), a.end());
     sort(l.begin(), l.end());
     size_t aptr = 0;
