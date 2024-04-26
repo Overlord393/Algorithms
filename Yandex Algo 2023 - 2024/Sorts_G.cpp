@@ -18,4 +18,5 @@ int main() {
     for (int item : nums) {
         cout << item << " ";
     }
+
 }

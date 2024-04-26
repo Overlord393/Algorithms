@@ -19,7 +19,6 @@ int main() {
         cin >> num_contestant >> points;
         contestants.push_back(make_pair(num_contestant, points));
     }
-
     sort(contestants.begin(), contestants.end(), [](const pair<int, int>& a, const pair<int, int>& b){
         return tie(a.second, b.first) > tie(b.second, a.first);
     });

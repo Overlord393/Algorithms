@@ -19,6 +19,7 @@ int main() {
         cin >> a >> b;
         line_segment[i] = make_pair(a, b);
     }
+
     sort(line_segment.begin(), line_segment.end());
     int ptrleft = line_segment[0].first;
     int ptrright = line_segment[0].second;

@@ -21,6 +21,7 @@ int minfunc(int a, int b, int c, int d) {
     }
     return ans;
 }
+
 int maxfunc(int a, int b, int c, int d) {
     int ans = 0;
     if (a > ans) {

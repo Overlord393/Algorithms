@@ -16,6 +16,7 @@ int main() {
     while (cin >> n) {
         a.push_back(n);
     }
+
     sort(a.begin(), a.end(), compare);
     string result;
     for (size_t i = 0; i < a.size(); ++i) {
